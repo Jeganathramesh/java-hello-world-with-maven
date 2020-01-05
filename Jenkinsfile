@@ -1,8 +1,7 @@
 #!/usr/bin/env groovy
 def appName= 'testing'
 def major_version = 1.0 
-def build_number =  BUILD_NUMBER
-def version =appName + '-' + major_version + '.' + build_number
+
 
 node{ 
 
@@ -20,6 +19,8 @@ sh 'mvn clean install'
 }
   
   stage('renaming jar'){
+        def build_number =  BUILD_NUMBER
+    def version =appName + '-' + major_version + '.' + build_number
     sh 'mv $WORKSPACE/target/jb*.jar $WORKSPACE/target/"${version}".jar'
     sh 'ls -la $WORKSPACE/target'
     echo "The current app Name is ${version}"
